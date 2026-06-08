@@ -1,38 +1,24 @@
 # Gerador de Checking Pajolla
 
-Versão 1.1 corrigida: ajuste para gerar vários slides sem erro no PowerPoint.
+Versão online 1.2.
 
-Aplicativo web gratuito em Streamlit para gerar PPTX de checking a partir do modelo padrão da Pajolla.
+## Arquivos necessários no GitHub
 
-## Como rodar no computador
+- app.py
+- requirements.txt
+- template_checking_pajolla.pptx
+- .streamlit/config.toml
 
-1. Instale o Python 3.10 ou superior.
-2. Abra o terminal dentro desta pasta.
-3. Execute:
+## Rodar no computador
 
 ```bash
-pip install -r requirements.txt
-streamlit run app.py
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
 ```
 
-## Como publicar grátis no Streamlit Community Cloud
+## Publicar no Streamlit Community Cloud
 
-1. Crie uma conta no GitHub.
-2. Crie um repositório, por exemplo `gerador-checking-pajolla`.
-3. Envie estes arquivos para o repositório:
-   - `app.py`
-   - `requirements.txt`
-   - `template_checking_pajolla.pptx`
-4. Acesse o Streamlit Community Cloud.
-5. Clique em **New app**.
-6. Selecione o repositório e o arquivo `app.py`.
-7. Clique em **Deploy**.
-
-Depois disso a equipe acessa por um link, preenche os campos, sobe as fotos e baixa o PPTX pronto.
-
-## Observações
-
-- O app mantém a capa do modelo.
-- Usa 1 foto por slide.
-- As fotos são inseridas sem deformar.
-- O layout base fica no arquivo `template_checking_pajolla.pptx`.
+1. Suba estes arquivos no repositório do GitHub.
+2. No Streamlit Community Cloud, escolha o repositório.
+3. Main file path: `app.py`
+4. Clique em Deploy.
