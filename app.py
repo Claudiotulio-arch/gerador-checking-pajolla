@@ -22,7 +22,7 @@ st.set_page_config(
 )
 
 st.title("Gerador de Checking Pajolla")
-st.caption("Versão online 1.2 — preencha os campos, envie as fotos e baixe o PowerPoint pronto.")
+st.caption("Versão online 1.3 — preencha os campos, envie as fotos e baixe o PowerPoint pronto.")
 
 
 def _delete_slide(prs: Presentation, index: int) -> None:
@@ -112,11 +112,21 @@ def _replace_by_position(slide, values: dict) -> None:
         for shp in slide.shapes:
             if shp == label_shape or not getattr(shp, "has_text_frame", False):
                 continue
+
+            current_text = _shape_text(shp).strip()
+            # Ignora caixas de texto vazias e a área/fake placeholder da foto.
+            # Isso evita o bug em que o campo LOCAL era escrito numa caixa invisível
+            # e a cidade original do modelo continuava aparecendo.
+            if not current_text or current_text.upper() == "FOTO":
+                continue
+
             if shp.left <= label_shape.left:
                 continue
+
             vertical_distance = abs((shp.top + shp.height / 2) - (label_shape.top + label_shape.height / 2))
             if vertical_distance < Pt(28):
                 candidates.append((vertical_distance, shp.left, shp))
+
         if candidates:
             _, _, shp = sorted(candidates, key=lambda x: (x[0], x[1]))[0]
             _replace_text_preserving_style(shp, value)
